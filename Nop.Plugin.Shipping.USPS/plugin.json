@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Shipping rate computation",
+  "FriendlyName": "USPS (2026 API)",
+  "SystemName": "Shipping.USPS",
+  "Version": "2.0.0",
+  "SupportedVersions": [ "4.20" ],
+  "Author": "E3iO Consulting",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Shipping.USPS.dll",
+  "Description": "USPS shipping plugin using new OAuth2 REST API (replaces retired SOAP/XML API)"
+}

@@ -1,0 +1,118 @@
+@model Nop.Plugin.Shipping.USPS.Models.USPSShippingModel
+@{
+    Layout = "_ConfigurePlugin";
+    var domesticClasses = Nop.Plugin.Shipping.USPS.USPSShippingDefaults.DomesticMailClasses;
+    var intlClasses     = Nop.Plugin.Shipping.USPS.USPSShippingDefaults.InternationalMailClasses;
+}
+
+<form asp-controller="ShippingUSPS" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">USPS (2026 REST API) &mdash; Configuration</h3>
+            </div>
+            <div class="panel-body">
+
+                @* OAuth2 credentials *@
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Consumer Key</label>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ClientId" />
+                        <em class="help-block">The Consumer Key from the USPS Developer Portal (OAuth2 Client ID).</em>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Consumer Secret</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input name="ClientSecret"
+                               class="form-control"
+                               type="password"
+                               autocomplete="new-password"
+                               placeholder="@(Model.HasClientSecret ? "Saved — enter a new value to change" : "Enter Consumer Secret")" />
+                        <em class="help-block">The Consumer Secret from the USPS Developer Portal. Leave blank to keep the current saved value.</em>
+                    </div>
+                </div>
+
+                @* Sandbox / Production mode *@
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="UseSandbox" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UseSandbox" />
+                        <span asp-validation-for="UseSandbox"></span>
+                    </div>
+                </div>
+
+                @* Additional handling charge *@
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AdditionalHandlingCharge" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AdditionalHandlingCharge" />
+                        <span asp-validation-for="AdditionalHandlingCharge"></span>
+                    </div>
+                </div>
+
+                @* Domestic services *@
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AvailableCarrierServicesDomestic" />
+                    </div>
+                    <div class="col-md-9">
+                        @foreach (var mailClass in domesticClasses)
+                        {
+                            var displayName = Nop.Plugin.Shipping.USPS.USPSShippingDefaults.GetDomesticDisplayName(mailClass);
+                            var isChecked   = Model.CarrierServicesOfferedDomestic.Contains(mailClass);
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"
+                                           name="CheckedCarrierServicesDomestic"
+                                           value="@mailClass"
+                                           @(isChecked ? "checked=\"checked\"" : "") />
+                                    @displayName
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @* International services *@
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AvailableCarrierServicesInternational" />
+                    </div>
+                    <div class="col-md-9">
+                        @foreach (var mailClass in intlClasses)
+                        {
+                            var displayName = Nop.Plugin.Shipping.USPS.USPSShippingDefaults.GetInternationalDisplayName(mailClass);
+                            var isChecked   = Model.CarrierServicesOfferedInternational.Contains(mailClass);
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"
+                                           name="CheckedCarrierServicesInternational"
+                                           value="@mailClass"
+                                           @(isChecked ? "checked=\"checked\"" : "") />
+                                    @displayName
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn bg-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,125 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Copyright>Copyright © E3iO Consulting</Copyright>
+    <Company>E3iO Consulting</Company>
+    <Authors>E3iO Consulting</Authors>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nopSolutions/USPS-plugin-for-nopcommerce</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Shipping.USPS</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+    <!--Set this parameter to true to get the dlls copied from the NuGet cache to the output of your project.
+    You need to set this parameter to true if your plugin has a nuget package 
+    to ensure that the dlls copied from the NuGet cache to the output of your project-->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="logo.jpg" />
+    <None Remove="plugin.json" />
+    <None Remove="Views\Configure.cshtml" />
+    <None Remove="Views\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Configure.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ProjectReference omitted: building standalone with DLL references below -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Set NopCommercePath to the folder containing your NopCommerce 4.20 DLLs.
+      Example: C:\[YOUR NOPCOMMERCE DLL PATH]\
+      These DLLs are found in the bin folder of your running NopCommerce site.
+    -->
+    <NopCommercePath Include="[YOUR NOPCOMMERCE DLL PATH]\" />
+
+    <!-- NopCommerce Core DLLs -->
+    <Reference Include="Nop.Core">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Nop.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Nop.Services">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Nop.Services.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Nop.Web.Framework">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Nop.Web.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- ASP.NET Core MVC -->
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- ASP.NET Core -->
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- Microsoft Extensions -->
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Http">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.Extensions.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- Autofac -->
+    <Reference Include="Autofac">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- Newtonsoft JSON -->
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>[YOUR NOPCOMMERCE DLL PATH]\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  
+  <!-- NopTarget omitted: ClearPluginAssemblies.proj requires full NopCommerce solution tree -->
+
+</Project>
