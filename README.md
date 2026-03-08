@@ -1,6 +1,6 @@
-﻿nopCommerce Shipping.USPS plugin
+﻿nopCommerce Ver.4.20 Shipping.USPS plugin
 ===========
-Shipping plugin for USPS
+Shipping plugin for USPS new 2026 REST API with OAuth2
 
 nopCommerce site: [https://www.nopcommerce.com](https://www.nopcommerce.com)
 
